@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+
+int binarySearch(int books[], int size, int target) {
+    int left = 0, right = size - 1;
+
+    while (left <= right) {
+        int middle = left + (right - left) / 2;  
+
+
+        if (books[middle] == target)
+            return middle;  
+
+     
+        if (books[middle] < target)
+            left = middle + 1;
+
+        else
+            right = middle - 1;
+    }
+
+ 
+    return -1;
+}
+
+int main() {
+ 
+    int books[] = {101, 203, 305, 407, 512, 678, 789, 890, 1001};
+    int size = sizeof(books) / sizeof(books[0]); 
+    int bookID;
+
+  
+    printf("Enter the book ID to search for: ");
+    scanf("%d", &bookID);
+
+   
+    int result = binarySearch(books, size, bookID);
+
+   
+    if (result != -1)
+        printf("Book ID %d is available at index %d.\n", bookID, result);
+    else
+        printf("Book ID %d is not available in the library.\n", bookID);
+
+    return 0;
+}
