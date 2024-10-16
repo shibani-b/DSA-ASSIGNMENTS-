@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+
+
+bool isPrime(int num) {
+    if (num < 2) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(num); i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int n, num1, num2, primeCount = 0;
+    
+  
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    
+   
+    while (n >= 10) {
+        num1 = n % 100;   
+        num2 = n / 10;    
+        
+       
+        if (isPrime(num1)) {
+            primeCount++;  
+        }
+        
+        n = num2; 
+    }
+    
+   
+    printf("Number of two-digit prime numbers: %d\n", primeCount);
+    
+    return 0;
+}
