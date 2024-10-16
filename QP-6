@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+
+struct Student {
+    int reg_no;        
+    char name[50];      
+    int age;           
+    float cgpa;         
+};
+
+
+void getStudentInfo(struct Student* s) {
+    printf("Enter Register Number: ");
+    scanf("%d", &s->reg_no);
+    
+    printf("Enter Name: ");
+    getchar(); 
+    fgets(s->name, sizeof(s->name), stdin);
+    s->name[strcspn(s->name, "\n")] = '\0';   
+    
+    printf("Enter Age: ");
+    scanf("%d", &s->age);
+    
+    printf("Enter CGPA: ");
+    scanf("%f", &s->cgpa);
+}
+
+
+int findTopper(struct Student students[], int count) {
+    int topperIndex = 0;
+    float highestCGPA = students[0].cgpa;
+    
+    for (int i = 1; i < count; i++) {
+        if (students[i].cgpa > highestCGPA) {
+            highestCGPA = students[i].cgpa;
+            topperIndex = i;
+        }
+    }
+    
+    return topperIndex;
+}
+
+int main() {
+    struct Student students[5]; 
+    int i, topperIndex;
+
+   
+    for (i = 0; i < 5; i++) {
+        printf("\nEnter details for student %d:\n", i + 1);
+        getStudentInfo(&students[i]);
+    }
+
+   
+    topperIndex = findTopper(students, 5);
+
+   
+    printf("\nThe student with the highest CGPA is:\n");
+    printf("Register Number: %d\n", students[topperIndex].reg_no);
+    printf("Name: %s\n", students[topperIndex].name);
+    printf("Age: %d\n", students[topperIndex].age);
+    printf("CGPA: %.2f\n", students[topperIndex].cgpa);
+
+    return 0;
+}
